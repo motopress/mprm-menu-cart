@@ -3,7 +3,7 @@
  * Plugin Name: Menu cart
  * Plugin URI: http://www.getmotopress.com
  * Description: This plugin gives you the power to effectively create, maintain and display online menus for almost any kind of restaurant, cafes and other typical food establishments.
- * Version: 0.2.0
+ * Version: 0.6.0
  * Author: MotoPress
  * Author URI: http://www.getmotopress.com
  * License: GPLv2 or later

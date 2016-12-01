@@ -57,7 +57,6 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 */
 	public function init_plugin($name) {
 		Core::include_all(MP_MENU_PLUGIN_PATH . 'functions/');
-
 		$this->hooks();
 	}
 
@@ -70,6 +69,9 @@ class Core extends \mp_restaurant_menu\classes\Core {
 		add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
 		add_action('wp_enqueue_scripts', array($this, 'add_theme_script'));
 		Menu_cart::get_instance()->init_action();
+
+		add_action('wp_ajax_mp_menu_cart_ajax', array(Menu_cart::get_instance(), 'output_menu_cart_ajax'), 0);
+		add_action('wp_ajax_nopriv_mp_menu_cart_ajax', array(Menu_cart::get_instance(), 'output_menu_cart_ajax'), 0);
 	}
 
 	/**
@@ -153,6 +155,19 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 */
 	public function add_theme_script() {
 		wp_enqueue_style('mp-menu-cart-icons', MP_MENU_ASSETS_URL . 'css/style.css', array(), '', 'all');
+		$this->add_custom_theme_js();
+	}
+
+	/**
+	 * Add custom js
+	 */
+	public function add_custom_theme_js() {
+		wp_enqueue_script('mp-menu-functions', MP_MENU_ASSETS_URL . 'js/menu-cart-functions' . $this->get_prefix() . '.js', array(), $this->version, true);
+		wp_localize_script('mp-menu-functions', 'mp_menu_cart_ajax', array(
+				'ajax_url' => admin_url('admin-ajax.php'),
+				'nonce' => wp_create_nonce('mp-menu-cart')
+			)
+		);
 	}
 
 	/**

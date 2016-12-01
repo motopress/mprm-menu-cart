@@ -159,57 +159,60 @@ class Settings extends Model {
 	 * Add settings.
 	 */
 	public function init_settings() {
-		$this->get_settings();
-		if (false == get_option($this->option_slug)) {
-			add_option($this->option_slug);
-		}
+		if ($this->settings_type != 'extension') {
+			$this->get_settings();
 
-		foreach ($this->get_registered_settings() as $tab => $sections) {
-			foreach ($sections as $section => $settings) {
-				// Check for backwards compatibility
-				$section_tabs = $this->get_settings_tab_sections($tab);
-				if (!is_array($section_tabs) || !array_key_exists($section, $section_tabs)) {
-					$section = 'main';
-					$settings = $sections;
-				}
+			if (false == get_option($this->option_slug)) {
+				add_option($this->option_slug);
+			}
 
-				add_settings_section('mp_menu_settings_' . $tab . '_' . $section, __return_null(), '__return_false', 'mp_menu_settings_' . $tab . '_' . $section);
-
-				foreach ($settings as $option) {
-					// For backwards compatibility
-					if (empty($option['id'])) {
-						continue;
+			foreach ($this->get_registered_settings() as $tab => $sections) {
+				foreach ($sections as $section => $settings) {
+					// Check for backwards compatibility
+					$section_tabs = $this->get_settings_tab_sections($tab);
+					if (!is_array($section_tabs) || !array_key_exists($section, $section_tabs)) {
+						$section = 'main';
+						$settings = $sections;
 					}
-					$name = isset($option['name']) ? $option['name'] : '';
-					add_settings_field(
-						'mp_menu_settings[' . $option['id'] . ']',
-						$name,
-						method_exists($this, $option['type'] . '_callback') ? array($this, $option['type'] . '_callback') : array($this, 'missing_callback'),
-						'mp_menu_settings_' . $tab . '_' . $section,
-						'mp_menu_settings_' . $tab . '_' . $section,
-						array(
-							'section' => $section,
-							'id' => isset($option['id']) ? $option['id'] : null,
-							'desc' => !empty($option['desc']) ? $option['desc'] : '',
-							'name' => isset($option['name']) ? $option['name'] : null,
-							'size' => isset($option['size']) ? $option['size'] : null,
-							'options' => isset($option['options']) ? $option['options'] : '',
-							'std' => isset($option['std']) ? $option['std'] : '',
-							'min' => isset($option['min']) ? $option['min'] : null,
-							'max' => isset($option['max']) ? $option['max'] : null,
-							'step' => isset($option['step']) ? $option['step'] : null,
-							'chosen' => isset($option['chosen']) ? $option['chosen'] : null,
-							'placeholder' => isset($option['placeholder']) ? $option['placeholder'] : null,
-							'allow_blank' => isset($option['allow_blank']) ? $option['allow_blank'] : true,
-							'readonly' => isset($option['readonly']) ? $option['readonly'] : false,
-							'faux' => isset($option['faux']) ? $option['faux'] : false,
-							'multiple' => isset($option['multiple']) ? $option['multiple'] : false,
-						)
-					);
+
+					add_settings_section('mp_menu_settings_' . $tab . '_' . $section, __return_null(), '__return_false', 'mp_menu_settings_' . $tab . '_' . $section);
+
+					foreach ($settings as $option) {
+						// For backwards compatibility
+						if (empty($option['id'])) {
+							continue;
+						}
+						$name = isset($option['name']) ? $option['name'] : '';
+						add_settings_field(
+							'mp_menu_settings[' . $option['id'] . ']',
+							$name,
+							method_exists($this, $option['type'] . '_callback') ? array($this, $option['type'] . '_callback') : array($this, 'missing_callback'),
+							'mp_menu_settings_' . $tab . '_' . $section,
+							'mp_menu_settings_' . $tab . '_' . $section,
+							array(
+								'section' => $section,
+								'id' => isset($option['id']) ? $option['id'] : null,
+								'desc' => !empty($option['desc']) ? $option['desc'] : '',
+								'name' => isset($option['name']) ? $option['name'] : null,
+								'size' => isset($option['size']) ? $option['size'] : null,
+								'options' => isset($option['options']) ? $option['options'] : '',
+								'std' => isset($option['std']) ? $option['std'] : '',
+								'min' => isset($option['min']) ? $option['min'] : null,
+								'max' => isset($option['max']) ? $option['max'] : null,
+								'step' => isset($option['step']) ? $option['step'] : null,
+								'chosen' => isset($option['chosen']) ? $option['chosen'] : null,
+								'placeholder' => isset($option['placeholder']) ? $option['placeholder'] : null,
+								'allow_blank' => isset($option['allow_blank']) ? $option['allow_blank'] : true,
+								'readonly' => isset($option['readonly']) ? $option['readonly'] : false,
+								'faux' => isset($option['faux']) ? $option['faux'] : false,
+								'multiple' => isset($option['multiple']) ? $option['multiple'] : false,
+							)
+						);
+					}
 				}
 			}
+			register_setting($this->option_slug, 'mp_menu_settings', array($this, 'settings_sanitize'));
 		}
-		register_setting($this->option_slug, 'mp_menu_settings', array($this, 'settings_sanitize'));
 	}
 
 	/**
@@ -221,12 +224,20 @@ class Settings extends Model {
 	 */
 	public function get_settings($key = false) {
 		global $mp_menu_options;
-
-		$default_settings = $this->default_settings();
-		$mp_menu_options = get_option($this->option_slug, array());
-
-		if (empty($mp_menu_options)) {
-			$mp_menu_options = array_merge($default_settings, $mp_menu_options);
+		if ($this->settings_type == 'extension') {
+			$mp_menu_options = array(
+				'mpme_always_display' => mprm_get_option('mpme_always_display', '0'),
+				'mpme_icon_display' => mprm_get_option('mpme_icon_display', '0'),
+				'mpme_icon_list' => mprm_get_option('mpme_icon_list', 'zero'),
+				'mpme_display_type' => mprm_get_option('mpme_icon_list', 'items'),
+				'mpme_alignment' => mprm_get_option('mpme_icon_list', 'default')
+			);
+		} else {
+			$mp_menu_options = get_option($this->option_slug, array());
+			if (empty($mp_menu_options)) {
+				$default_settings = $this->default_settings();
+				$mp_menu_options = array_merge($default_settings, $mp_menu_options);
+			}
 		}
 
 		if (!empty($mp_menu_options[$key])) {
@@ -288,13 +299,14 @@ class Settings extends Model {
 				'id' => 'mpme_always_display',
 				'name' => __('Always display cart, even if it\'s empty', 'mprm-menu-cart'),
 				'type' => 'checkbox',
-				'desc' => __('', 'mprm-menu-cart'),
+				'desc' => __('', 'mprm-menu-cart')
+
 			),
 			'mpme_icon_display' => array(
 				'id' => 'mpme_icon_display',
 				'name' => __('Display shopping cart icon.', 'mprm-menu-cart'),
 				'type' => 'checkbox',
-				'desc' => __('', 'mprm-menu-cart'),
+				'desc' => __('', 'mprm-menu-cart')
 			),
 			'mpme_icon_list' => array(
 				'id' => 'mpme_icon_list',
@@ -302,6 +314,7 @@ class Settings extends Model {
 				'type' => 'radio',
 				'options' => $this->get_menu_icons(),
 				'desc' => __('', 'mprm-menu-cart'),
+				'std' => 'zero',
 			),
 			'mpme_display_type' => array(
 				'id' => 'mpme_display_type',
@@ -309,6 +322,7 @@ class Settings extends Model {
 				'type' => 'radio',
 				'options' => array('items' => 'Items only', 'price' => 'Price only', 'price_and_items' => 'Both price and items'),
 				'desc' => __('', 'mprm-menu-cart'),
+				'std' => 'items'
 			),
 			'mpme_alignment' => array(
 				'id' => 'mpme_alignment',
@@ -316,10 +330,11 @@ class Settings extends Model {
 				'type' => 'radio',
 				'options' => array('left' => 'Align Left.', 'right' => 'Align Right.', 'default' => 'Default Menu Alignment.'),
 				'desc' => __('', 'mprm-menu-cart'),
+				'std' => 'default'
 			),
 			'mpme_custom_class' => array(
 				'id' => 'mpme_custom_class',
-				'name' => __('Select the alignment that looks best with your menu.', 'mprm-menu-cart'),
+				'name' => __('Enter a custom CSS class (optional)', 'mprm-menu-cart'),
 				'type' => 'text',
 				'desc' => __('', 'mprm-menu-cart'),
 			)
@@ -334,7 +349,7 @@ class Settings extends Model {
 	 */
 	public function get_menu_icons() {
 		$menu_icons_list = array(
-			'0' => '<i class="mprm-cart-font icon-mprm-cart0"></i>',
+			'zero' => '<i class="mprm-cart-font icon-mprm-cartzero"></i>',
 			'1' => '<i class="mprm-cart-font icon-mprm-cart1"></i>',
 			'2' => '<i class="mprm-cart-font icon-mprm-cart2"></i>',
 			'3' => '<i class="mprm-cart-font icon-mprm-cart3"></i>',
