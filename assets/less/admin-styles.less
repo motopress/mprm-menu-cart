@@ -1,15 +1,25 @@
-.mp-menu-settings {
+.mprm-settings, .mp-menu-settings {
   .form-table {
 	td {
-	  .mprm-admin-icon {
-		line-height: 2em;
-		font-size: 2em;
-	  }
-	  input.mprm-admin-icon {
+	  input[name="mprm_settings[mpme_icon_list]"] {
 		margin-right: 5px;
 	  }
-	  label.mprm-admin-icon {
+	  input[name="mprm_settings[mpme_icon_list]"] + label {
 		margin-right: 10px;
+		i {
+		  line-height: 1.25em;
+		  font-size: 1.25em;
+		}
+	  }
+	  input[name="mp_menu_settings[mpme_icon_list]"] {
+		margin-right: 5px;
+	  }
+	  input[name="mp_menu_settings[mpme_icon_list]"] + label {
+		margin-right: 10px;
+		i {
+		  line-height: 1.25em;
+		  font-size: 1.25em;
+		}
 	  }
 	}
   }

@@ -1,6 +1,9 @@
 <?php
 namespace mprm_menu_cart\classes;
 
+use mprm_menu_cart\classes\models\Menu_cart;
+use mprm_menu_cart\classes\models\Settings;
+
 /**
  * Class Core
  *
@@ -13,6 +16,7 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 * Current state
 	 */
 	private $state;
+
 	private $version;
 
 	/**
@@ -53,8 +57,8 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 */
 	public function init_plugin($name) {
 		Core::include_all(MP_MENU_PLUGIN_PATH . 'functions/');
-		Settings::get_instance()->get_settings();
-		Settings::get_instance()->init_action();
+
+		$this->hooks();
 	}
 
 	/**
@@ -62,18 +66,17 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 */
 	public function hooks() {
 		add_action('init', array($this, 'wp_ajax_route_url'), 0);
-		add_action('admin_init', array(Settings::get_instance(), 'save_settings'));
-		add_action('admin_init', array(Settings::get_instance(), 'update_plugin_custom'), 9);
-
+		add_action('admin_init', array(Settings::get_instance(), 'init_settings'));
 		add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
 		add_action('wp_enqueue_scripts', array($this, 'add_theme_script'));
+		Menu_cart::get_instance()->init_action();
 	}
 
 	/**
 	 * Ajax route URL
 	 */
 	public function wp_ajax_route_url() {
-		$controller = isset($_REQUEST['mprde_controller']) ? $_REQUEST['mprde_controller'] : null;
+		$controller = isset($_REQUEST['mp_menu_controller']) ? $_REQUEST['mp_menu_controller'] : null;
 		$action = isset($_REQUEST['mprm_action']) ? $_REQUEST['mprm_action'] : null;
 		if (!empty($action) && !empty($controller)) {
 			// call controller
@@ -149,27 +152,7 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 * Add theme script
 	 */
 	public function add_theme_script() {
-		global $wp_scripts;
-		$prefix = $this->get_prefix();
-
-		wp_enqueue_script('mprm-delivery', MP_MENU_ASSETS_URL . "js/mprm-delivery{$prefix}.js", array(), $this->get_version(), true);
-		wp_enqueue_style('mprm-delivery', MP_MENU_ASSETS_URL . "css/delivery-style.css");
-
-		if (mprm_is_checkout()) {
-			wp_enqueue_script('jquery-ui-core');
-			// get registered script object for jquery-ui
-			$ui = $wp_scripts->query('jquery-ui-core');
-
-			// tell WordPress to load the Smoothness theme from Google CDN
-			$protocol = is_ssl() ? 'https' : 'http';
-			$url = "$protocol://ajax.googleapis.com/ajax/libs/jqueryui/{$ui->ver}/themes/ui-lightness/jquery-ui.min.css";
-
-			wp_enqueue_style('ui-lightness', $url, false, null);
-
-			wp_enqueue_style('mpde-chosen', MP_MENU_ASSETS_URL . "css/libs/chosen.css");
-
-			wp_enqueue_script('mpde-chosen-jquery', MP_MENU_ASSETS_URL . "js/libs/chosen.jquery{$prefix}.js", array(), '1.1.0', true);
-		}
+		wp_enqueue_style('mp-menu-cart-icons', MP_MENU_ASSETS_URL . 'css/style.css', array(), '', 'all');
 	}
 
 	/**
@@ -200,18 +183,15 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 * @param \WP_Screen $current_screen
 	 */
 	public function current_screen(\WP_Screen $current_screen) {
-		if (is_admin()) {
-			wp_enqueue_style('mprm-delivery', MP_MENU_ASSETS_URL . "css/delivery-style.css");
-		}
-
-		if (!empty($current_screen)) {
-
-			switch ($current_screen->id) {
-				case 'mprm_order':
-					break;
-				default:
-					break;
+		$tab = !empty($_GET['tab']) ? $_GET['tab'] : false;
+		if (!empty($current_screen) && $current_screen->base == 'restaurant-menu_page_mprm-settings') {
+			if ($tab == 'menu_cart') {
+				wp_enqueue_style('mp-menu-cart-icons', MP_MENU_ASSETS_URL . 'css/style.css', array(), '', 'all');
+				wp_enqueue_style('mp-menu-admin-styles', MP_MENU_ASSETS_URL . 'css/admin-styles.css', array(), '', 'all');
 			}
+		} elseif ($current_screen->base == 'toplevel_page_mprm_menu_cart') {
+			wp_enqueue_style('mp-menu-cart-icons', MP_MENU_ASSETS_URL . 'css/style.css', array(), '', 'all');
+			wp_enqueue_style('mp-menu-admin-styles', MP_MENU_ASSETS_URL . 'css/admin-styles.css', array(), '', 'all');
 		}
 	}
 }
