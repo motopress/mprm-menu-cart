@@ -336,14 +336,17 @@ class Settings extends Model {
 		$menu_icons_list = array(
 			'0' => '<i class="mprm-cart-font icon-mprm-cart0"></i>',
 			'1' => '<i class="mprm-cart-font icon-mprm-cart1"></i>',
+			'2' => '<i class="mprm-cart-font icon-mprm-cart2"></i>',
 			'3' => '<i class="mprm-cart-font icon-mprm-cart3"></i>',
 			'4' => '<i class="mprm-cart-font icon-mprm-cart4"></i>',
 			'5' => '<i class="mprm-cart-font icon-mprm-cart5"></i>',
 			'6' => '<i class="mprm-cart-font icon-mprm-cart6"></i>',
 			'7' => '<i class="mprm-cart-font icon-mprm-cart7"></i>',
-			'8' => '<i class="mprm-cart-font icon-mprm-cart8"></i>'
+			'8' => '<i class="mprm-cart-font icon-mprm-cart8"></i>',
+			'9' => '<i class="mprm-cart-font icon-mprm-cart9"></i>',
+			'10' => '<i class="mprm-cart-font icon-mprm-cart10"></i>'
 		);
-		return $menu_icons_list;
+		return apply_filters('mprm-menu-cart-icons', $menu_icons_list);
 	}
 
 	/**
