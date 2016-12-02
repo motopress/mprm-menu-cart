@@ -1,7 +1,6 @@
 <?php
 namespace mprm_menu_cart\classes\models;
 
-use mprm_menu_cart\classes\Core;
 use mprm_menu_cart\classes\Model;
 
 /**
@@ -220,7 +219,7 @@ class Menu_cart extends Model {
 			'cart_url' => mprm_get_checkout_uri(),
 			'shop_page_url' => get_home_url(),
 			'cart_contents_count' => mprm_get_cart_quantity(),
-			'cart_total' => mprm_currency_filter(mprm_format_amount(mprm_get_cart_total())),
+			'cart_total' => mprm_currency_filter(mprm_format_amount(mprm_get_cart_subtotal())),
 		);
 		return $menu_item;
 	}
@@ -229,10 +228,11 @@ class Menu_cart extends Model {
 	 * Add cart to menu
 	 *
 	 * @param $items
+	 * @param $menu_object
 	 *
 	 * @return mixed
 	 */
-	public function add_item_cart_to_menu($items) {
+	public function add_item_cart_to_menu($items, $menu_object) {
 		$custom_class = $this->get_model('settings')->get_option('mpme_custom_class', '');
 		$classes = 'mp-menu-cart-li mp-cart-display-' . $this->get_model('settings')->get_option('mpme_alignment', 'default') . ' ' . $custom_class;
 
@@ -242,7 +242,7 @@ class Menu_cart extends Model {
 
 		$classes = apply_filters('mp_menu_item_classes', $classes);
 		$mp_menu_item = apply_filters('mp_menu_item_filter', $this->get_cart_menu_item());
-		$menu_item_li = '<li class="' . $classes . '" id="mp-menu-">' . $mp_menu_item . '</li>';
+		$menu_item_li = '<li class="' . $classes . '" id="mp-menu-' . $menu_object->menu->slug . '">' . $mp_menu_item . '</li>';
 
 		if (apply_filters('mp_prepend_menu_item', false)) {
 			$items = apply_filters('mp_menu_item_wrapper', $menu_item_li) . $items;
