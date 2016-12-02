@@ -87,14 +87,12 @@ class MP_menu_cart_plugin {
 	 * On activation plugin
 	 */
 	public static function on_activation() {
-		flush_rewrite_rules();
 	}
 
 	/**
 	 * On deactivation plugin
 	 */
 	public static function on_deactivation() {
-		flush_rewrite_rules();
 	}
 
 	/**
