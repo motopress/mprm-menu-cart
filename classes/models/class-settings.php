@@ -149,10 +149,7 @@ class Settings extends Model {
 	 * @param $args
 	 */
 	public function missing_callback($args) {
-		printf(
-			__('The callback function used for the %s setting is missing.', 'mprm-menu-cart'),
-			'<strong>' . $args['id'] . '</strong>'
-		);
+		printf(__('The callback function used for the %s setting is missing.', 'mprm-menu-cart'), '<strong>' . $args['id'] . '</strong>');
 	}
 
 	/**
@@ -298,22 +295,18 @@ class Settings extends Model {
 			'mpme_always_display' => array(
 				'id' => 'mpme_always_display',
 				'name' => __('Always display cart, even if it\'s empty', 'mprm-menu-cart'),
-				'type' => 'checkbox',
-				'desc' => __('', 'mprm-menu-cart')
-
+				'type' => 'checkbox'
 			),
 			'mpme_icon_display' => array(
 				'id' => 'mpme_icon_display',
 				'name' => __('Display shopping cart icon.', 'mprm-menu-cart'),
-				'type' => 'checkbox',
-				'desc' => __('', 'mprm-menu-cart')
+				'type' => 'checkbox'
 			),
 			'mpme_icon_list' => array(
 				'id' => 'mpme_icon_list',
 				'name' => __('Choose a cart icon.', 'mprm-menu-cart'),
 				'type' => 'radio',
 				'options' => $this->get_menu_icons(),
-				'desc' => __('', 'mprm-menu-cart'),
 				'std' => 'zero',
 			),
 			'mpme_display_type' => array(
@@ -321,7 +314,6 @@ class Settings extends Model {
 				'name' => __('What would you like to display in the menu?', 'mprm-menu-cart'),
 				'type' => 'radio',
 				'options' => array('items' => 'Items only', 'price' => 'Price only', 'price_and_items' => 'Both price and items'),
-				'desc' => __('', 'mprm-menu-cart'),
 				'std' => 'items'
 			),
 			'mpme_alignment' => array(
@@ -329,14 +321,12 @@ class Settings extends Model {
 				'name' => __('Select the alignment that looks best with your menu.', 'mprm-menu-cart'),
 				'type' => 'radio',
 				'options' => array('left' => 'Align Left.', 'right' => 'Align Right.', 'default' => 'Default Menu Alignment.'),
-				'desc' => __('', 'mprm-menu-cart'),
 				'std' => 'default'
 			),
 			'mpme_custom_class' => array(
 				'id' => 'mpme_custom_class',
 				'name' => __('Enter a custom CSS class (optional)', 'mprm-menu-cart'),
-				'type' => 'text',
-				'desc' => __('', 'mprm-menu-cart'),
+				'type' => 'text'
 			)
 		);
 		return $settings_list;

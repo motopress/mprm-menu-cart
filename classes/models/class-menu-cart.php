@@ -27,13 +27,10 @@ class Menu_cart extends Model {
 	 */
 	public function init_action() {
 		add_action('init', array($this, 'filter_nav_menus'));
-//		add_action('admin_menu', array($this, 'add_admin_menu'));
-
 		add_filter('mprm_settings_tabs', array($this, 'mp_menu_settings_tabs'), 10, 1);
 		add_filter('mprm_settings_sections', array($this, 'add_settings_sections'), 10, 1);
 		add_filter('mprm_settings_sections_menu_cart', array($this, 'add_settings_sections_menu_cart'), 10, 1);
 		add_filter('mprm_registered_settings', array($this, 'change_registered_settings'), 10, 1);
-
 		add_filter('mprm_settings_menu_cart', array($this, 'add_settings_data'), 10, 1);
 	}
 
@@ -74,7 +71,7 @@ class Menu_cart extends Model {
 	 */
 	public function add_settings_sections_menu_cart($sections) {
 		if (empty($sections)) {
-			$sections['main'] = __('Main', 'mprm-delivery');
+			$sections['main'] = __('Main', 'mprm-menu-cart');
 		}
 		return $sections;
 	}
@@ -312,12 +309,5 @@ class Menu_cart extends Model {
 		}
 
 		return $menu_list;
-	}
-
-	/**
-	 *  Add admin in menu
-	 */
-	public function add_admin_menu() {
-		//add_menu_page(__('menu cart menu', 'mprm-menu-cart'), __('Restaurant menu cart menu', 'mprm-menu-cart'), 'manage_options', 'mprm_menu_cart', array(Settings::get_instance(), 'options_page'));
 	}
 }

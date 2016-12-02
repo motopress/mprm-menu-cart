@@ -2,16 +2,14 @@
 /**
  * Plugin Name: Menu cart
  * Plugin URI: http://www.getmotopress.com
- * Description: This plugin gives you the power to effectively create, maintain and display online menus for almost any kind of restaurant, cafes and other typical food establishments.
- * Version: 0.6.0
+ * Description: Extension for Restaurant Menu that places a cart icon with number of items and total cost in the menu bar.
+ * Version: 1.0.0
  * Author: MotoPress
  * Author URI: http://www.getmotopress.com
  * License: GPLv2 or later
  * Text Domain: mprm-menu-cart
  * Domain Path: /languages
  */
-
-$local = $_SERVER['REMOTE_ADDR'] == '127.0.0.1' ? TRUE : FALSE;
 
 define('MP_MENU_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('MP_MENU_MEDIA_URL', plugins_url(plugin_basename(__DIR__) . '/media/'));
@@ -21,7 +19,7 @@ define('MP_MENU_ASSETS_URL', plugins_url(plugin_basename(__DIR__) . '/assets/'))
 define('MP_MENU_TEMPLATES_PATH', MP_MENU_PLUGIN_PATH . 'templates/');
 define('MP_MENU_PLUGIN_NAME', str_replace('-', '_', dirname(plugin_basename(__FILE__))));
 define('MP_MENU_LANG_PATH', MP_MENU_PLUGIN_PATH . 'languages/');
-define('MP_MENU_DEBUG', $local);
+define('MP_MENU_DEBUG', FALSE);
 
 register_activation_hook(__FILE__, array(MP_menu_cart_plugin::init(), 'on_activation'));
 register_deactivation_hook(__FILE__, array('MP_menu_cart_plugin', 'on_deactivation'));
