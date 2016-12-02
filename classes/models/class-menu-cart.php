@@ -242,7 +242,7 @@ class Menu_cart extends Model {
 
 		$classes = apply_filters('mp_menu_item_classes', $classes);
 		$mp_menu_item = apply_filters('mp_menu_item_filter', $this->get_cart_menu_item());
-		$menu_item_li = '<li class="' . $classes . '" id="mp-menu-' . $menu_object->menu->slug . '">' . $mp_menu_item . '</li>';
+		$menu_item_li = '<li class="' . $classes . '" id="mp-menu-cart-' . $menu_object->menu->slug . '">' . $mp_menu_item . '</li>';
 
 		if (apply_filters('mp_prepend_menu_item', false)) {
 			$items = apply_filters('mp_menu_item_wrapper', $menu_item_li) . $items;
