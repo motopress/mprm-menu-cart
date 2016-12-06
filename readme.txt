@@ -25,6 +25,10 @@ This plugin installs a shopping cart button in the navigation bar. Plugin option
 
 == Changelog ==
 
+= 1.0.1 =
+
+* Bug fix: Fixed the issue of classes compatibility autoloading.
+
 = 1.0 =
 
 * First Release
