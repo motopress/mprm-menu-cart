@@ -138,8 +138,6 @@ class Loader {
 			} elseif ((bool)preg_match_all("/mprm_menu_cart(.*)?classes(.*)?controllers/", $class, $matches)) {
 				$type = 'controller';
 			}
-
-
 			$class = $this->get_class_name($class);
 
 			switch ($type) {
@@ -183,12 +181,11 @@ class Loader {
 	 *
 	 * @return object
 	 */
-
 	public function load_models($model) {
 		if ($model) {
-			set_include_path($this->modelDirectoryPath);
-			spl_autoload_extensions('.php');
-			spl_autoload($model);
+			set_include_path(get_include_path() . PATH_SEPARATOR . $this->modelDirectoryPath);
+			spl_autoload($model, '.php');
+			restore_include_path();
 		}
 	}
 
@@ -199,9 +196,9 @@ class Loader {
 	 */
 	public function load_controller($controller) {
 		if ($controller) {
-			set_include_path($this->controllerDirectoryPath);
-			spl_autoload_extensions('.php');
-			spl_autoload($controller);
+			set_include_path(get_include_path() . PATH_SEPARATOR . $this->controllerDirectoryPath);
+			spl_autoload($controller, '.php');
+			restore_include_path();
 		}
 	}
 
@@ -212,9 +209,9 @@ class Loader {
 	 */
 	public function load_default($class) {
 		if ($class) {
-			set_include_path($this->defaultDirectoryPath);
-			spl_autoload_extensions('.php');
-			spl_autoload($class);
+			set_include_path(get_include_path() . PATH_SEPARATOR . $this->defaultDirectoryPath);
+			spl_autoload($class, '.php');
+			restore_include_path();
 		}
 	}
 }
