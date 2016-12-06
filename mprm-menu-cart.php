@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Menu cart
  * Plugin URI: http://www.getmotopress.com
- * Description: Extension for Restaurant Menu that places a cart icon with number of items and total cost in the menu bar.
+ * Description: Displays a shopping cart of Restaurant Menu plugin in your menu bar.
  * Version: 1.0.0
  * Author: MotoPress
  * Author URI: http://www.getmotopress.com
