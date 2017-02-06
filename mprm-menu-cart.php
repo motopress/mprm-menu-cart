@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Menu cart
+ * Plugin Name: Restaurant Menu Cart
  * Plugin URI: http://www.getmotopress.com
  * Description: Displays a shopping cart of Restaurant Menu plugin in your menu bar.
  * Version: 1.0.1
