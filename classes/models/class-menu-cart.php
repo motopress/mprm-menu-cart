@@ -247,7 +247,8 @@ class Menu_cart extends Model {
 		
 		$classes = apply_filters('mp_menu_item_classes', $classes);
 		$mp_menu_item = apply_filters('mp_menu_item_filter', $this->get_cart_menu_item());
-		$menu_item_li = '<li class="' . $classes . '" id="mp-menu-cart-' . $menu_object->menu->slug . '">' . $mp_menu_item . '</li>';
+		
+		$menu_item_li = '<li class="' . $classes . '" id="mp-menu-cart-' . $this->get_menu_slug($menu_object) . '">' . $mp_menu_item . '</li>';
 		
 		if (apply_filters('mp_prepend_menu_item', false)) {
 			$items = apply_filters('mp_menu_item_wrapper', $menu_item_li) . $items;
@@ -302,6 +303,27 @@ class Menu_cart extends Model {
 		}
 		
 		return $common_li_classes_flat;
+	}
+	
+	/**
+	 * @param $menu_object
+	 *
+	 * @return string
+	 */
+	protected function get_menu_slug($menu_object) {
+		if (is_object($menu_object->menu)) {
+			$menu_slug = $menu_object->menu->slug;
+			
+			return $menu_slug;
+		} elseif (is_string($menu_object->menu)) {
+			$menu_slug = empty($menu_object->menu) ? '' : $menu_object->menu;
+			
+			return $menu_slug;
+		} else {
+			$menu_slug = '';
+		}
+		
+		return $menu_slug;
 	}
 	
 	/**
