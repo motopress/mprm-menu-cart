@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Menu cart\n"
-"POT-Creation-Date: 2016-12-02 12:15+0200\n"
+"POT-Creation-Date: 2017-02-07 16:36+0200\n"
 "PO-Revision-Date: 2016-12-02 12:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,85 +15,85 @@ msgstr ""
 "X-Poedit-WPHeader: mprm-menu-cart.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: classes/models/class-menu-cart.php:74
+#: classes/models/class-menu-cart.php:77
 msgid "Main"
 msgstr ""
 
-#: classes/models/class-menu-cart.php:88
+#: classes/models/class-menu-cart.php:92
 msgid "Menu Cart"
 msgstr ""
 
-#: classes/models/class-menu-cart.php:155
+#: classes/models/class-menu-cart.php:162
 msgid "View your shopping cart"
 msgstr ""
 
-#: classes/models/class-menu-cart.php:156
+#: classes/models/class-menu-cart.php:163
 msgid "Start shopping"
 msgstr ""
 
-#: classes/models/class-menu-cart.php:158
+#: classes/models/class-menu-cart.php:165
 #, php-format
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: classes/models/class-settings.php:152
+#: classes/models/class-settings.php:153
 #, php-format
 msgid "The callback function used for the %s setting is missing."
 msgstr ""
 
-#: classes/models/class-settings.php:288
+#: classes/models/class-settings.php:291
 msgid "Select the menu"
 msgstr ""
 
-#: classes/models/class-settings.php:289
+#: classes/models/class-settings.php:292
 msgid "Select the menu(s) in which you want to display the Menu Cart"
 msgstr ""
 
-#: classes/models/class-settings.php:293
+#: classes/models/class-settings.php:295
 msgid "Select a menu"
 msgstr ""
 
-#: classes/models/class-settings.php:297
+#: classes/models/class-settings.php:300
 msgid "Always display cart, even if it's empty"
 msgstr ""
 
-#: classes/models/class-settings.php:302
+#: classes/models/class-settings.php:305
 msgid "Display shopping cart icon."
 msgstr ""
 
-#: classes/models/class-settings.php:307
+#: classes/models/class-settings.php:310
 msgid "Choose a cart icon."
 msgstr ""
 
-#: classes/models/class-settings.php:314
+#: classes/models/class-settings.php:317
 msgid "What would you like to display in the menu?"
 msgstr ""
 
-#: classes/models/class-settings.php:321
+#: classes/models/class-settings.php:324
 msgid "Select the alignment that looks best with your menu."
 msgstr ""
 
-#: classes/models/class-settings.php:328
+#: classes/models/class-settings.php:331
 msgid "Enter a custom CSS class (optional)"
 msgstr ""
 
-#: classes/models/class-settings.php:391 classes/models/class-settings.php:495
+#: classes/models/class-settings.php:396 classes/models/class-settings.php:500
 msgid "General"
 msgstr ""
 
-#: classes/models/class-settings.php:468
+#: classes/models/class-settings.php:473
 msgid "Settings updated."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "Menu cart"
+msgid "Restaurant Menu Cart"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
@@ -102,9 +102,7 @@ msgid "http://www.getmotopress.com"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid ""
-"Extension for Restaurant Menu that places a cart icon with number of items "
-"and total cost in the menu bar."
+msgid "Displays a shopping cart of Restaurant Menu plugin in your menu bar."
 msgstr ""
 
 #. Author of the plugin/theme
