@@ -27,6 +27,9 @@ This plugin installs a shopping cart button in the navigation bar. Plugin option
 
 == Changelog ==
 
+= 1.0.5 =
+* Bug fix: Fixed plugin name.
+
 = 1.0.4 =
 * load_plugin_textdomain
 

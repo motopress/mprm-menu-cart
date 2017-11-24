@@ -3,7 +3,7 @@
  * Plugin Name: Restaurant Menu Cart
  * Plugin URI: https://motopress.com
  * Description: Displays a shopping cart of Restaurant Menu plugin in your menu bar.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: MotoPress
  * Author URI: https://motopress.com
  * License: GPLv2 or later
