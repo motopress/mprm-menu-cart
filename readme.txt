@@ -27,6 +27,9 @@ This plugin installs a shopping cart button in the navigation bar. Plugin option
 
 == Changelog ==
 
+= 1.0.4 =
+* load_plugin_textdomain
+
 = 1.0.3 =
 * Localization - Russian translation.
 
