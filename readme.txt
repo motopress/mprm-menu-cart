@@ -1,9 +1,9 @@
 === Restaurant Menu Cart ===
 Contributors: MotoPress
-Donate link: http://www.getmotopress.com/
+Donate link: https://motopress.com/
 Tags: menu,bar,cart,sell online,wp-ecommerce,restaurant menu,header,motopress
 Requires at least: 4.5
-Tested up to: 4.7
+Tested up to: 4.9
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -26,6 +26,9 @@ This plugin installs a shopping cart button in the navigation bar. Plugin option
 3. Use the `Restaurant Menu > Settings > Extensions > Menu Cart` screen to configure the plugin.
 
 == Changelog ==
+
+= 1.0.3 =
+* Localization - Russian translation.
 
 = 1.0.2 =
 * Minor bugfixes and improvements

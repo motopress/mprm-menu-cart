@@ -188,25 +188,8 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 * Add js by current screen
 	 */
 	public function admin_enqueue_scripts() {
-		global $current_screen;
-		$this->current_screen($current_screen);
+		wp_enqueue_style('mp-menu-cart-icons', MP_MENU_ASSETS_URL . 'css/style.css', array(), '', 'all');
+		wp_enqueue_style('mp-menu-admin-styles', MP_MENU_ASSETS_URL . 'css/admin-styles.css', array(), '', 'all');
 	}
 
-	/**
-	 * Current screen
-	 *
-	 * @param \WP_Screen $current_screen
-	 */
-	public function current_screen(\WP_Screen $current_screen) {
-		$tab = !empty($_GET['tab']) ? $_GET['tab'] : false;
-		if (!empty($current_screen) && $current_screen->base == 'restaurant-menu_page_mprm-settings') {
-			if ($tab == 'menu_cart') {
-				wp_enqueue_style('mp-menu-cart-icons', MP_MENU_ASSETS_URL . 'css/style.css', array(), '', 'all');
-				wp_enqueue_style('mp-menu-admin-styles', MP_MENU_ASSETS_URL . 'css/admin-styles.css', array(), '', 'all');
-			}
-		} elseif ($current_screen->base == 'toplevel_page_mprm_menu_cart') {
-			wp_enqueue_style('mp-menu-cart-icons', MP_MENU_ASSETS_URL . 'css/style.css', array(), '', 'all');
-			wp_enqueue_style('mp-menu-admin-styles', MP_MENU_ASSETS_URL . 'css/admin-styles.css', array(), '', 'all');
-		}
-	}
 }

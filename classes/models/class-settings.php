@@ -316,14 +316,22 @@ class Settings extends Model {
 				'id' => 'mpme_display_type',
 				'name' => __('What would you like to display in the menu?', 'mprm-menu-cart'),
 				'type' => 'radio',
-				'options' => array('items' => 'Items only', 'price' => 'Price only', 'price_and_items' => 'Both price and items'),
+				'options' => array(
+					'items' => __('Items only', 'mprm-menu-cart'),
+					'price' => __('Price only', 'mprm-menu-cart'),
+					'price_and_items' => __('Both price and items', 'mprm-menu-cart')
+				),
 				'std' => 'items'
 			),
 			'mpme_alignment' => array(
 				'id' => 'mpme_alignment',
 				'name' => __('Select the alignment that looks best with your menu.', 'mprm-menu-cart'),
 				'type' => 'radio',
-				'options' => array('left' => 'Align Left.', 'right' => 'Align Right.', 'default' => 'Default Menu Alignment.'),
+				'options' => array(
+					'left' => __('Align Left', 'mprm-menu-cart'),
+					'right' => __('Align Right', 'mprm-menu-cart'),
+					'default' => __('Default Menu Alignment', 'mprm-menu-cart')
+				),
 				'std' => 'default'
 			),
 			'mpme_custom_class' => array(

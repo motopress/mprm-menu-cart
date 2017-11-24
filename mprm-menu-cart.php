@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Restaurant Menu Cart
- * Plugin URI: http://www.getmotopress.com
+ * Plugin URI: https://motopress.com
  * Description: Displays a shopping cart of Restaurant Menu plugin in your menu bar.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: MotoPress
- * Author URI: http://www.getmotopress.com
+ * Author URI: https://motopress.com
  * License: GPLv2 or later
  * Text Domain: mprm-menu-cart
  * Domain Path: /languages
@@ -18,7 +18,6 @@ define('MP_MENU_CSS_URL', MP_MENU_MEDIA_URL . 'css/');
 define('MP_MENU_ASSETS_URL', plugins_url(plugin_basename(__DIR__) . '/assets/'));
 define('MP_MENU_TEMPLATES_PATH', MP_MENU_PLUGIN_PATH . 'templates/');
 define('MP_MENU_PLUGIN_NAME', str_replace('-', '_', dirname(plugin_basename(__FILE__))));
-define('MP_MENU_LANG_PATH', MP_MENU_PLUGIN_PATH . 'languages/');
 define('MP_MENU_DEBUG', FALSE);
 
 register_activation_hook(__FILE__, array(MP_menu_cart_plugin::init(), 'on_activation'));
