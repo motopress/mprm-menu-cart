@@ -139,9 +139,15 @@ class Menu_cart extends Model {
 	 * Output ajax cart item
 	 */
 	public function output_menu_cart_ajax() {
-		$cart_menu_item = $this->get_cart_menu_item();
-		echo $cart_menu_item;
-		die();
+
+		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'mp-menu-cart' ) ) {
+			wp_die( __( 'Security check', 'mprm-menu-cart' ), 403 ); 
+		} else {
+			$cart_menu_item = $this->get_cart_menu_item();
+			echo $cart_menu_item;
+		}
+
+		wp_die();
 	}
 	
 	/**

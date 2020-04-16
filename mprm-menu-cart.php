@@ -1,15 +1,19 @@
 <?php
 /**
  * Plugin Name: Restaurant Menu Cart
- * Plugin URI: https://motopress.com
+ * Plugin URI: https://motopress.com/products/restaurant-menu-cart/
  * Description: Displays a shopping cart of Restaurant Menu plugin in your menu bar.
- * Version: 1.0.5
+ * Version: 1.0.6
  * Author: MotoPress
  * Author URI: https://motopress.com
  * License: GPLv2 or later
  * Text Domain: mprm-menu-cart
  * Domain Path: /languages
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 define('MP_MENU_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('MP_MENU_MEDIA_URL', plugins_url(plugin_basename(__DIR__) . '/media/'));
@@ -18,12 +22,12 @@ define('MP_MENU_CSS_URL', MP_MENU_MEDIA_URL . 'css/');
 define('MP_MENU_ASSETS_URL', plugins_url(plugin_basename(__DIR__) . '/assets/'));
 define('MP_MENU_TEMPLATES_PATH', MP_MENU_PLUGIN_PATH . 'templates/');
 define('MP_MENU_PLUGIN_NAME', str_replace('-', '_', dirname(plugin_basename(__FILE__))));
-define('MP_MENU_DEBUG', FALSE);
 
-register_activation_hook(__FILE__, array(MP_menu_cart_plugin::init(), 'on_activation'));
-register_deactivation_hook(__FILE__, array('MP_menu_cart_plugin', 'on_deactivation'));
-register_uninstall_hook(__FILE__, array('MP_menu_cart_plugin', 'on_uninstall'));
-add_action('plugins_loaded', array('MP_menu_cart_plugin', 'init'));
+if ( ! defined( 'MP_MENU_DEBUG' ) ) {
+	define('MP_MENU_DEBUG', FALSE);
+}
+
+add_action( 'plugins_loaded', array( 'MP_menu_cart_plugin', 'init' ) );
 
 use mprm_menu_cart\classes\Core;
 use mprm_menu_cart\classes\misc\Loader;
@@ -39,6 +43,7 @@ class MP_menu_cart_plugin {
 	 * MP_menu_cart_plugin constructor.
 	 */
 	public function __construct() {
+
 		$this->include_all();
 		Loader::get_instance()->init_loader();
 
@@ -83,24 +88,5 @@ class MP_menu_cart_plugin {
 			self::$instance = new self();
 		}
 		return self::$instance;
-	}
-
-	/**
-	 * On activation plugin
-	 */
-	public static function on_activation() {
-	}
-
-	/**
-	 * On deactivation plugin
-	 */
-	public static function on_deactivation() {
-	}
-
-	/**
-	 * On uninstall
-	 */
-	public static function on_uninstall() {
-
 	}
 }

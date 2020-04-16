@@ -162,8 +162,8 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 * Add custom js
 	 */
 	public function add_custom_theme_js() {
-		wp_enqueue_script('mp-menu-functions', MP_MENU_ASSETS_URL . 'js/menu-cart-functions' . $this->get_prefix() . '.js', array(), $this->version, true);
-		wp_localize_script('mp-menu-functions', 'mp_menu_cart_ajax', array(
+		wp_enqueue_script('mp-restaurant-menu-cart', MP_MENU_ASSETS_URL . 'js/menu-cart-functions' . $this->get_prefix() . '.js', array(), $this->version, true);
+		wp_localize_script('mp-restaurant-menu-cart', 'mp_menu_cart_ajax', array(
 				'ajax_url' => admin_url('admin-ajax.php'),
 				'nonce' => wp_create_nonce('mp-menu-cart')
 			)
