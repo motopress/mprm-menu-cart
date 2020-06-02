@@ -4,7 +4,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Project-Id-Version: Menu cart\n"
-"POT-Creation-Date: 2020-04-16 19:53+0300\n"
+"POT-Creation-Date: 2020-06-02 23:20+0300\n"
 "PO-Revision-Date: 2016-12-02 12:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -55,11 +55,11 @@ msgid "The callback function used for the %s setting is missing."
 msgstr ""
 
 #: classes/models/class-settings.php:291
-msgid "Select the menu"
+msgid "Menu"
 msgstr ""
 
 #: classes/models/class-settings.php:292
-msgid "Select the menu(s) in which you want to display the Menu Cart"
+msgid "Select the menu in which you want to display the cart"
 msgstr ""
 
 #: classes/models/class-settings.php:295
@@ -67,58 +67,62 @@ msgid "Select a menu"
 msgstr ""
 
 #: classes/models/class-settings.php:300
+msgid "Empty cart"
+msgstr ""
+
+#: classes/models/class-settings.php:301
 msgid "Always display cart, even if it's empty"
 msgstr ""
 
-#: classes/models/class-settings.php:305
-msgid "Display shopping cart icon."
+#: classes/models/class-settings.php:306
+msgid "Cart icon"
 msgstr ""
 
-#: classes/models/class-settings.php:310
-msgid "Choose a cart icon."
+#: classes/models/class-settings.php:307
+msgid "Display shopping cart icon"
 msgstr ""
 
-#: classes/models/class-settings.php:317
+#: classes/models/class-settings.php:319
 msgid "What would you like to display in the menu?"
 msgstr ""
 
-#: classes/models/class-settings.php:320
+#: classes/models/class-settings.php:322
 msgid "Items only"
 msgstr ""
 
-#: classes/models/class-settings.php:321
+#: classes/models/class-settings.php:323
 msgid "Price only"
 msgstr ""
 
-#: classes/models/class-settings.php:322
+#: classes/models/class-settings.php:324
 msgid "Both price and items"
 msgstr ""
 
-#: classes/models/class-settings.php:328
+#: classes/models/class-settings.php:330
 msgid "Select the alignment that looks best with your menu."
 msgstr ""
 
-#: classes/models/class-settings.php:331
+#: classes/models/class-settings.php:333
 msgid "Align Left"
 msgstr ""
 
-#: classes/models/class-settings.php:332
+#: classes/models/class-settings.php:334
 msgid "Align Right"
 msgstr ""
 
-#: classes/models/class-settings.php:333
+#: classes/models/class-settings.php:335
 msgid "Default Menu Alignment"
 msgstr ""
 
-#: classes/models/class-settings.php:339
+#: classes/models/class-settings.php:341
 msgid "Enter a custom CSS class (optional)"
 msgstr ""
 
-#: classes/models/class-settings.php:404 classes/models/class-settings.php:508
+#: classes/models/class-settings.php:406 classes/models/class-settings.php:510
 msgid "General"
 msgstr ""
 
-#: classes/models/class-settings.php:481
+#: classes/models/class-settings.php:483
 msgid "Settings updated."
 msgstr ""
 

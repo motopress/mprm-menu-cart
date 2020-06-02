@@ -288,8 +288,8 @@ class Settings extends Model {
 		$settings_list = array(
 			'mpme_select_menu_id' => array(
 				'id' => 'mpme_select_menu_id',
-				'name' => __('Select the menu', 'mprm-menu-cart'),
-				'desc' => __('Select the menu(s) in which you want to display the Menu Cart', 'mprm-menu-cart'),
+				'name' => __('Menu', 'mprm-menu-cart'),
+				'desc' => '<br>' . __('Select the menu in which you want to display the cart', 'mprm-menu-cart'),
 				'type' => 'select',
 				'options' => Menu_cart::get_instance()->get_menu_array(),
 				'placeholder' => __('Select a menu', 'mprm-menu-cart'),
@@ -297,17 +297,19 @@ class Settings extends Model {
 			),
 			'mpme_always_display' => array(
 				'id' => 'mpme_always_display',
-				'name' => __('Always display cart, even if it\'s empty', 'mprm-menu-cart'),
+				'name' => __('Empty cart', 'mprm-menu-cart'),
+				'desc' => __('Always display cart, even if it\'s empty', 'mprm-menu-cart'),
 				'type' => 'checkbox'
 			),
 			'mpme_icon_display' => array(
 				'id' => 'mpme_icon_display',
-				'name' => __('Display shopping cart icon.', 'mprm-menu-cart'),
+				'name' => __('Cart icon', 'mprm-menu-cart'),
+				'desc' => __('Display shopping cart icon', 'mprm-menu-cart'),
 				'type' => 'checkbox'
 			),
 			'mpme_icon_list' => array(
 				'id' => 'mpme_icon_list',
-				'name' => __('Choose a cart icon.', 'mprm-menu-cart'),
+				'name' => '',
 				'type' => 'radio',
 				'options' => $this->get_menu_icons(),
 				'std' => 'zero',

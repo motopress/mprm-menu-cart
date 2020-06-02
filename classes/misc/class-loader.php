@@ -185,7 +185,7 @@ class Loader {
 		if ($model) {
 			set_include_path(get_include_path() . PATH_SEPARATOR . $this->modelDirectoryPath);
 			spl_autoload($model, '.php');
-			restore_include_path();
+			ini_restore('include_path');
 		}
 	}
 
@@ -198,7 +198,7 @@ class Loader {
 		if ($controller) {
 			set_include_path(get_include_path() . PATH_SEPARATOR . $this->controllerDirectoryPath);
 			spl_autoload($controller, '.php');
-			restore_include_path();
+			ini_restore('include_path');
 		}
 	}
 
@@ -211,7 +211,7 @@ class Loader {
 		if ($class) {
 			set_include_path(get_include_path() . PATH_SEPARATOR . $this->defaultDirectoryPath);
 			spl_autoload($class, '.php');
-			restore_include_path();
+			ini_restore('include_path');
 		}
 	}
 }

@@ -32,6 +32,9 @@ Use the Restaurant Menu > Settings > Extensions > Menu Cart screen to configure 
 
 == Changelog ==
 
+= 1.0.7, Jun 2 2020 =
+* Improved compatibility with PHP 7.4.
+
 = 1.0.6, Apr 16 2020 =
 * Minor bugfixes and improvements.
 
