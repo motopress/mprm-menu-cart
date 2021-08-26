@@ -2,9 +2,8 @@
 
 ![](https://img.shields.io/wordpress/plugin/v/mprm-menu-cart)
 ![](https://img.shields.io/wordpress/plugin/wp-version/mprm-menu-cart)
-![](https://img.shields.io/wordpress/plugin/dd/mprm-menu-cart)
+![](https://img.shields.io/wordpress/plugin/dm/mprm-menu-cart)
 ![](https://img.shields.io/wordpress/plugin/installs/mprm-menu-cart)
-![](https://img.shields.io/wordpress/plugin/rating/mprm-menu-cart)
 ![](https://img.shields.io/badge/license-GPL--2.0%2B-blue.svg?style=flat)
 
 This is a free extension to the [WordPress Food Menu plugin](https://motopress.com/products/restaurant-menu/) by MotoPress.
