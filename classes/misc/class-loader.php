@@ -119,7 +119,7 @@ class Loader {
 				throw new \ISException('You must enter the name of the class.');
 			}
 		} catch (\Exception $exception) {
-			echo $exception;
+			echo $exception; // phpcs:ignore
 		}
 	}
 

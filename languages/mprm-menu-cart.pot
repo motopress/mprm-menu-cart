@@ -1,25 +1,38 @@
-#, fuzzy
+# Copyright (C) 2021 MotoPress
+# This file is distributed under the same license as the Restaurant Menu Cart plugin.
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Project-Id-Version: Menu cart\n"
-"POT-Creation-Date: 2020-06-02 23:20+0300\n"
-"PO-Revision-Date: 2016-12-02 12:08+0200\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Project-Id-Version: Restaurant Menu Cart 1.0.8\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mprm-menu-cart\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-WPHeader: mprm-menu-cart.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
+"POT-Creation-Date: 2021-11-23T00:26:44+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: mprm-menu-cart\n"
+
+#. Plugin Name of the plugin
+msgid "Restaurant Menu Cart"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://motopress.com/products/restaurant-menu-cart/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Displays a shopping cart of Restaurant Menu plugin in your menu bar."
+msgstr ""
+
+#. Author of the plugin
+msgid "MotoPress"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://motopress.com"
+msgstr ""
 
 #: classes/models/class-menu-cart.php:77
 msgid "Main"
@@ -33,115 +46,93 @@ msgstr ""
 msgid "Security check"
 msgstr ""
 
-#: classes/models/class-menu-cart.php:168
+#: classes/models/class-menu-cart.php:169
 msgid "View your shopping cart"
 msgstr ""
 
-#: classes/models/class-menu-cart.php:169
+#: classes/models/class-menu-cart.php:170
 msgid "Start shopping"
 msgstr ""
 
-#: classes/models/class-menu-cart.php:171
-#, php-format
+#: classes/models/class-menu-cart.php:172
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
 
-#: classes/models/class-settings.php:153
-#, php-format
+#: classes/models/class-settings.php:164
 msgid "The callback function used for the %s setting is missing."
 msgstr ""
 
-#: classes/models/class-settings.php:291
+#: classes/models/class-settings.php:304
 msgid "Menu"
 msgstr ""
 
-#: classes/models/class-settings.php:292
+#: classes/models/class-settings.php:305
 msgid "Select the menu in which you want to display the cart"
 msgstr ""
 
-#: classes/models/class-settings.php:295
+#: classes/models/class-settings.php:308
 msgid "Select a menu"
 msgstr ""
 
-#: classes/models/class-settings.php:300
+#: classes/models/class-settings.php:313
 msgid "Empty cart"
 msgstr ""
 
-#: classes/models/class-settings.php:301
+#: classes/models/class-settings.php:314
 msgid "Always display cart, even if it's empty"
 msgstr ""
 
-#: classes/models/class-settings.php:306
+#: classes/models/class-settings.php:319
 msgid "Cart icon"
 msgstr ""
 
-#: classes/models/class-settings.php:307
+#: classes/models/class-settings.php:320
 msgid "Display shopping cart icon"
 msgstr ""
 
-#: classes/models/class-settings.php:319
+#: classes/models/class-settings.php:332
 msgid "What would you like to display in the menu?"
 msgstr ""
 
-#: classes/models/class-settings.php:322
+#: classes/models/class-settings.php:335
 msgid "Items only"
 msgstr ""
 
-#: classes/models/class-settings.php:323
+#: classes/models/class-settings.php:336
 msgid "Price only"
 msgstr ""
 
-#: classes/models/class-settings.php:324
+#: classes/models/class-settings.php:337
 msgid "Both price and items"
 msgstr ""
 
-#: classes/models/class-settings.php:330
+#: classes/models/class-settings.php:343
 msgid "Select the alignment that looks best with your menu."
 msgstr ""
 
-#: classes/models/class-settings.php:333
+#: classes/models/class-settings.php:346
 msgid "Align Left"
 msgstr ""
 
-#: classes/models/class-settings.php:334
+#: classes/models/class-settings.php:347
 msgid "Align Right"
 msgstr ""
 
-#: classes/models/class-settings.php:335
+#: classes/models/class-settings.php:348
 msgid "Default Menu Alignment"
 msgstr ""
 
-#: classes/models/class-settings.php:341
+#: classes/models/class-settings.php:354
 msgid "Enter a custom CSS class (optional)"
 msgstr ""
 
-#: classes/models/class-settings.php:406 classes/models/class-settings.php:510
+#: classes/models/class-settings.php:419
+#: classes/models/class-settings.php:530
 msgid "General"
 msgstr ""
 
-#: classes/models/class-settings.php:483
+#: classes/models/class-settings.php:497
 msgid "Settings updated."
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "Restaurant Menu Cart"
-msgstr ""
-
-#. Plugin URI of the plugin/theme
-msgid "https://motopress.com/products/restaurant-menu-cart/"
-msgstr ""
-
-#. Description of the plugin/theme
-msgid "Displays a shopping cart of Restaurant Menu plugin in your menu bar."
-msgstr ""
-
-#. Author of the plugin/theme
-msgid "MotoPress"
-msgstr ""
-
-#. Author URI of the plugin/theme
-msgid "https://motopress.com"
 msgstr ""

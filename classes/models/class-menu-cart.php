@@ -74,7 +74,7 @@ class Menu_cart extends Model {
 	 */
 	public function add_settings_sections_menu_cart($sections) {
 		if (empty($sections)) {
-			$sections[ 'main' ] = __('Main', 'mprm-menu-cart');
+			$sections[ 'main' ] = esc_html__('Main', 'mprm-menu-cart');
 		}
 		
 		return $sections;
@@ -89,7 +89,7 @@ class Menu_cart extends Model {
 	 */
 	public function mp_menu_settings_tabs($tabs) {
 		if (is_array($tabs)) {
-			$tabs[ 'menu_cart' ] = __('Menu Cart', 'mprm-menu-cart');
+			$tabs[ 'menu_cart' ] = esc_html__('Menu Cart', 'mprm-menu-cart');
 		}
 		
 		return $tabs;
@@ -140,11 +140,11 @@ class Menu_cart extends Model {
 	 */
 	public function output_menu_cart_ajax() {
 
-		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'mp-menu-cart' ) ) {
-			wp_die( __( 'Security check', 'mprm-menu-cart' ), 403 ); 
+		if ( ! isset( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'mp-menu-cart' ) ) {
+			wp_die( esc_html__( 'Security check', 'mprm-menu-cart' ), 403 ); 
 		} else {
 			$cart_menu_item = $this->get_cart_menu_item();
-			echo $cart_menu_item;
+			echo $cart_menu_item; // phpcs:ignore
 		}
 
 		wp_die();
@@ -154,6 +154,7 @@ class Menu_cart extends Model {
 	 * Create HTML for Menu Cart item
 	 */
 	public function get_cart_menu_item() {
+
 		$item_data = $this->get_menu_item();
 		$always_display = $this->get_model('settings')->get_option('mpme_always_display', false);
 		$icon_display = $this->get_model('settings')->get_option('mpme_icon_display', false);
@@ -165,8 +166,8 @@ class Menu_cart extends Model {
 			
 			return $empty_menu_item;
 		}
-		$viewing_cart = __('View your shopping cart', 'mprm-menu-cart');
-		$start_shopping = __('Start shopping', 'mprm-menu-cart');
+		$viewing_cart = esc_html__('View your shopping cart', 'mprm-menu-cart');
+		$start_shopping = esc_html__('Start shopping', 'mprm-menu-cart');
 		
 		$items_label = apply_filters('mp-menu-cart-item-label', _n('%d item', '%d items', $item_data[ 'cart_contents_count' ], 'mprm-menu-cart'));
 		
@@ -183,14 +184,14 @@ class Menu_cart extends Model {
 			$menu_item_classes = 'mp-menu-cart-contents';
 		}
 		
-		$menu_item = '<a class="' . $menu_item_classes . '" href="' . $menu_item_href . '" title="' . $menu_item_title . '">';
+		$menu_item = '<a class="' . esc_attr( $menu_item_classes ) . '" href="' . esc_url( $menu_item_href ) . '" title="' . esc_attr( $menu_item_title ) . '">';
 		
 		$menu_item_a_content = '';
 		
 		if ($icon_display) {
 			$icon_list = $this->get_model('settings')->get_option('mpme_icon_list', 'zero');
 			$icon = isset($icon_list) ? $icon_list : '0';
-			$menu_item_icon = '<i class="mprm-cart-font icon-mprm-cart' . $icon . '"></i>';
+			$menu_item_icon = '<i class="mprm-cart-font icon-mprm-cart' . esc_attr( $icon ) . '"></i>';
 			$menu_item_a_content .= $menu_item_icon;
 		} else {
 			$menu_item_icon = '';

@@ -42,16 +42,19 @@ class Settings extends Model {
 	 * @param $args
 	 */
 	public function radio_callback($args) {
+
 		global $mp_menu_options;
+
 		foreach ($args[ 'options' ] as $key => $option) :
 			$checked = false;
 			if (isset($mp_menu_options[ $args[ 'id' ] ]) && $mp_menu_options[ $args[ 'id' ] ] == $key)
 				$checked = true;
 			elseif (isset($args[ 'std' ]) && $args[ 'std' ] == $key && !isset($mp_menu_options[ $args[ 'id' ] ]))
 				$checked = true;
-			echo '<input class="mprm-admin-icon" name="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . ']" id="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . '][' . sanitize_key($key) . ']" type="radio" value="' . sanitize_key($key) . '" ' . checked(true, $checked, false) . '/>';
-			echo '<label class="mprm-admin-icon" for="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . '][' . sanitize_key($key) . ']">' . $option . '</label><br/>';
+			echo '<input class="mprm-admin-icon" name="' . esc_attr( $this->option_slug ) . '[' . esc_attr( $args[ 'id' ] ) . ']" id="' . esc_attr( $this->option_slug ) . '[' . esc_attr( $args[ 'id' ] ) . '][' . esc_attr( $key ) . ']" type="radio" value="' . esc_attr( $key ) . '" ' . checked(true, $checked, false) . '/>';
+			echo '<label class="mprm-admin-icon" for="' . esc_attr( $this->option_slug ) . '[' . esc_attr( $args[ 'id' ] ) . '][' . esc_attr( $key ) . ']">' . wp_kses_post( $option ) . '</label><br/>';
 		endforeach;
+
 		echo '<p class="description">' . wp_kses_post($args[ 'desc' ]) . '</p>';
 	}
 	
@@ -67,22 +70,26 @@ class Settings extends Model {
 		} else {
 			$value = isset($args[ 'std' ]) ? $args[ 'std' ] : '';
 		}
+
+		$placeholder = !isset($args[ 'placeholder' ]) ? '' : $args[ 'placeholder' ];
+		$size = (isset($args[ 'size' ]) && !is_null($args[ 'size' ])) ? $args[ 'size' ] : 'regular';
+
+		?>
+		<input type="text" class="<?php echo esc_attr( $size ); ?>-text" id="<?php echo esc_attr( $this->option_slug ); ?>[<?php echo esc_attr( $args[ 'id' ] ); ?>]" 
+		<?php
 		if (isset($args[ 'faux' ]) && true === $args[ 'faux' ]) {
 			$args[ 'readonly' ] = true;
 			$value = isset($args[ 'std' ]) ? $args[ 'std' ] : '';
-			$name = '';
-		} else {
-			$name = 'name="' . $this->option_slug . '[' . esc_attr($args[ 'id' ]) . ']"';
-		}
-		$placeholder = !isset($args[ 'placeholder' ]) ? '' : $args[ 'placeholder' ];
-		
-		$readonly = $args[ 'readonly' ] === true ? ' readonly="readonly"' : '';
-		$size = (isset($args[ 'size' ]) && !is_null($args[ 'size' ])) ? $args[ 'size' ] : 'regular';
-		$html = '<input type="text" class="' . sanitize_html_class($size) . '-text" id="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . ']" ' . $name . ' placeholder="' . esc_attr(stripslashes($placeholder)) . '"' . ' value="' . esc_attr(stripslashes($value)) . '"' . $readonly . '/>';
-		$html .= '<label for="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . ']"> ' . wp_kses_post($args[ 'desc' ]) . '</label>';
-		echo $html;
+			echo '';
+		} else { ?>
+			name="<?php echo esc_attr( $this->option_slug ); ?>[<?php echo esc_attr( $args[ 'id' ] ); ?>]"
+		<?php } ?>
+		placeholder="<?php echo esc_attr( stripslashes( $placeholder ) ); ?>" value="<?php echo esc_attr( stripslashes( $value ) ); ?>" <?php
+			if ( $args[ 'readonly' ] === true ) { echo 'readonly="readonly"'; } ?> />
+		<label for="<?php echo esc_attr( $this->option_slug ); ?>[<?php echo esc_attr( $args[ 'id' ] ); ?>]"><?php echo wp_kses_post($args[ 'desc' ]); ?></label>
+		<?php
 	}
-	
+
 	/**
 	 * Select callback
 	 *
@@ -100,30 +107,28 @@ class Settings extends Model {
 		} else {
 			$placeholder = '';
 		}
+
+		?>
+		<select id="<?php echo esc_attr( $this->option_slug ); ?>[<?php echo esc_attr( $args[ 'id' ] ); ?>]"<?php
+		if ( isset($args[ 'multiple' ]) && $args[ 'multiple' ] ) {
+			echo ' multiple="multiple"';
+		}
 		if (isset($args[ 'readonly' ]) && ($args[ 'readonly' ] == true)) {
-			$disabled = 'disabled="disabled"';
-		} else {
-			$disabled = '';
+			echo ' disabled="disabled"';
 		}
-		
-		if (isset($args[ 'multiple' ]) && $args[ 'multiple' ]) {
-			$multiple = 'multiple="multiple"';
-		} else {
-			$multiple = '';
-		}
+		?> name="<?php echo esc_attr( $this->option_slug ); ?>[<?php echo esc_attr( $args[ 'id' ] ); ?>]" <?php
 		if (isset($args[ 'chosen' ]) && $args[ 'chosen' ]) {
-			$chosen = 'class="mprm-chosen mprm-select-chosen"';
-		} else {
-			$chosen = '';
+			echo ' class="mprm-chosen mprm-select-chosen"';
 		}
-		$html = '<select id="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . ']" ' . $multiple . ' ' . $disabled . ' name="' . $this->option_slug . '[' . esc_attr($args[ 'id' ]) . ']" ' . $chosen . 'data-placeholder="' . esc_html($placeholder) . '" />';
+		?> data-placeholder="<?php echo esc_attr( $placeholder ); ?>" />
+		<?php
 		foreach ($args[ 'options' ] as $option => $name) {
-			$selected = selected($option, $value, false);
-			$html .= '<option value="' . esc_attr($option) . '" ' . $selected . '>' . esc_html($name) . '</option>';
-		}
-		$html .= '</select>';
-		$html .= '<label for="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . ']"> ' . wp_kses_post($args[ 'desc' ]) . '</label>';
-		echo $html;
+			?>
+			<option value="<?php echo esc_attr( $option ); ?>" <?php selected($option, $value);  ?>><?php echo esc_html( $name ); ?></option>
+		<?php } ?>
+		</select>
+		<label for="<?php echo esc_attr( $this->option_slug ); ?>[<?php echo esc_attr( $args[ 'id' ] ); ?>]"><?php echo wp_kses_post( $args[ 'desc' ] ); ?></label>
+		<?php
 	}
 	
 	/**
@@ -132,16 +137,21 @@ class Settings extends Model {
 	 * @param $args
 	 */
 	public function checkbox_callback($args) {
+
 		global $mp_menu_options;
+
+		?>
+		<input type="checkbox" id="<?php echo esc_attr( $this->option_slug ); ?>[<?php echo esc_attr( $args[ 'id' ] ); ?>]" <?php
 		if (isset($args[ 'faux' ]) && true === $args[ 'faux' ]) {
-			$name = '';
+			echo '';
 		} else {
-			$name = 'name="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . ']"';
+			echo ' name="' . esc_attr( $this->option_slug ) . '[' . esc_attr( $args[ 'id' ] ) . ']"';
 		}
-		$checked = isset($mp_menu_options[ $args[ 'id' ] ]) ? checked(1, $mp_menu_options[ $args[ 'id' ] ], false) : '';
-		$html = '<input type="checkbox" id="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . ']"' . $name . ' value="1" ' . $checked . '/>';
-		$html .= '<label for="' . $this->option_slug . '[' . sanitize_key($args[ 'id' ]) . ']"> ' . wp_kses_post($args[ 'desc' ]) . '</label>';
-		echo $html;
+		?> value="1" <?php
+			if ( isset($mp_menu_options[ $args[ 'id' ] ] ) ) { checked( 1, $mp_menu_options[ $args[ 'id' ] ] ); }
+		?>/>
+		<label for="<?php echo esc_attr( $this->option_slug ); ?>[<?php echo esc_attr( $args[ 'id' ] ); ?>]"><?php echo wp_kses_post( $args[ 'desc' ] ); ?></label>
+		<?php
 	}
 	
 	/**
@@ -150,7 +160,10 @@ class Settings extends Model {
 	 * @param $args
 	 */
 	public function missing_callback($args) {
-		printf(__('The callback function used for the %s setting is missing.', 'mprm-menu-cart'), '<strong>' . $args[ 'id' ] . '</strong>');
+		printf(
+			esc_html__('The callback function used for the %s setting is missing.', 'mprm-menu-cart'),
+			'<strong>' . esc_html( $args[ 'id' ] ) . '</strong>'
+		);
 	}
 	
 	/**
@@ -288,23 +301,23 @@ class Settings extends Model {
 		$settings_list = array(
 			'mpme_select_menu_id' => array(
 				'id' => 'mpme_select_menu_id',
-				'name' => __('Menu', 'mprm-menu-cart'),
-				'desc' => '<br>' . __('Select the menu in which you want to display the cart', 'mprm-menu-cart'),
+				'name' => esc_html__('Menu', 'mprm-menu-cart'),
+				'desc' => '<br>' . esc_html__('Select the menu in which you want to display the cart', 'mprm-menu-cart'),
 				'type' => 'select',
 				'options' => Menu_cart::get_instance()->get_menu_array(),
-				'placeholder' => __('Select a menu', 'mprm-menu-cart'),
+				'placeholder' => esc_html__('Select a menu', 'mprm-menu-cart'),
 				'chosen' => false
 			),
 			'mpme_always_display' => array(
 				'id' => 'mpme_always_display',
-				'name' => __('Empty cart', 'mprm-menu-cart'),
-				'desc' => __('Always display cart, even if it\'s empty', 'mprm-menu-cart'),
+				'name' => esc_html__('Empty cart', 'mprm-menu-cart'),
+				'desc' => esc_html__('Always display cart, even if it\'s empty', 'mprm-menu-cart'),
 				'type' => 'checkbox'
 			),
 			'mpme_icon_display' => array(
 				'id' => 'mpme_icon_display',
-				'name' => __('Cart icon', 'mprm-menu-cart'),
-				'desc' => __('Display shopping cart icon', 'mprm-menu-cart'),
+				'name' => esc_html__('Cart icon', 'mprm-menu-cart'),
+				'desc' => esc_html__('Display shopping cart icon', 'mprm-menu-cart'),
 				'type' => 'checkbox'
 			),
 			'mpme_icon_list' => array(
@@ -316,29 +329,29 @@ class Settings extends Model {
 			),
 			'mpme_display_type' => array(
 				'id' => 'mpme_display_type',
-				'name' => __('What would you like to display in the menu?', 'mprm-menu-cart'),
+				'name' => esc_html__('What would you like to display in the menu?', 'mprm-menu-cart'),
 				'type' => 'radio',
 				'options' => array(
-					'items' => __('Items only', 'mprm-menu-cart'),
-					'price' => __('Price only', 'mprm-menu-cart'),
-					'price_and_items' => __('Both price and items', 'mprm-menu-cart')
+					'items' => esc_html__('Items only', 'mprm-menu-cart'),
+					'price' => esc_html__('Price only', 'mprm-menu-cart'),
+					'price_and_items' => esc_html__('Both price and items', 'mprm-menu-cart')
 				),
 				'std' => 'items'
 			),
 			'mpme_alignment' => array(
 				'id' => 'mpme_alignment',
-				'name' => __('Select the alignment that looks best with your menu.', 'mprm-menu-cart'),
+				'name' => esc_html__('Select the alignment that looks best with your menu.', 'mprm-menu-cart'),
 				'type' => 'radio',
 				'options' => array(
-					'left' => __('Align Left', 'mprm-menu-cart'),
-					'right' => __('Align Right', 'mprm-menu-cart'),
-					'default' => __('Default Menu Alignment', 'mprm-menu-cart')
+					'left' => esc_html__('Align Left', 'mprm-menu-cart'),
+					'right' => esc_html__('Align Right', 'mprm-menu-cart'),
+					'default' => esc_html__('Default Menu Alignment', 'mprm-menu-cart')
 				),
 				'std' => 'default'
 			),
 			'mpme_custom_class' => array(
 				'id' => 'mpme_custom_class',
-				'name' => __('Enter a custom CSS class (optional)', 'mprm-menu-cart'),
+				'name' => esc_html__('Enter a custom CSS class (optional)', 'mprm-menu-cart'),
 				'type' => 'text'
 			)
 		);
@@ -403,7 +416,7 @@ class Settings extends Model {
 		
 		$sections = array(
 			'general' => apply_filters('mp_menu_settings_sections_general', array(
-				'main' => __('General', 'mprm-menu-cart'),
+				'main' => esc_html__('General', 'mprm-menu-cart'),
 			))
 		);
 		
@@ -420,18 +433,19 @@ class Settings extends Model {
 	 * @return array|mixed
 	 */
 	public function settings_sanitize($input = array()) {
+
 		global $mp_menu_options;
-		
-		if (empty($mp_menu_options)) {
+
+		if ( empty($mp_menu_options) ) {
 			$mp_menu_options = array();
 		}
-		
-		if (empty($_POST[ '_wp_http_referer' ])) {
+
+		if ( empty($_POST[ '_wp_http_referer' ]) ) {
 			return $input;
 		}
-		
-		parse_str($_POST[ '_wp_http_referer' ], $referrer);
-		
+
+		parse_str( sanitize_text_field( wp_unslash( $_POST[ '_wp_http_referer' ] ) ), $referrer );
+
 		$settings = $this->get_registered_settings();
 		
 		$tab = isset($referrer[ 'tab' ]) ? $referrer[ 'tab' ] : 'general';
@@ -480,7 +494,7 @@ class Settings extends Model {
 		// Merge our new settings with the existing
 		$output = array_merge($mp_menu_options, $input);
 		
-		add_settings_error('mprm-notices', '', __('Settings updated.', 'mprm-menu-cart'), 'updated');
+		add_settings_error('mprm-notices', '', esc_html__('Settings updated.', 'mprm-menu-cart'), 'updated');
 		
 		return $output;
 	}
@@ -491,13 +505,19 @@ class Settings extends Model {
 	 * Render settings page
 	 */
 	public function options_page() {
+
 		$data[ 'settings_tabs' ] = $settings_tabs = $this->get_settings_tabs();
 		$settings_tabs = empty($settings_tabs) ? array() : $settings_tabs;
 		$key = 'main';
-		$data[ 'active_tab' ] = isset($_GET[ 'tab' ]) && array_key_exists($_GET[ 'tab' ], $settings_tabs) ? $_GET[ 'tab' ] : 'general';
+
+		$data[ 'active_tab' ] = isset($_GET[ 'tab' ]) && array_key_exists( sanitize_text_field( wp_unslash( $_GET[ 'tab' ] ) ), $settings_tabs) ?
+			sanitize_text_field( wp_unslash( $_GET[ 'tab' ] ) ) : 'general';
+
 		$data[ 'sections' ] = $this->get_settings_tab_sections($data[ 'active_tab' ]);
-		$data[ 'section' ] = isset($_GET[ 'section' ]) && !empty($data[ 'sections' ]) && array_key_exists($_GET[ 'section' ], $data[ 'sections' ]) ? $_GET[ 'section' ] : $key;
-		echo View::get_instance()->get_template_html('settings', $data);
+		$data[ 'section' ] = isset($_GET[ 'section' ]) && !empty($data[ 'sections' ]) && array_key_exists( sanitize_text_field( wp_unslash( $_GET[ 'section' ] ) ), $data[ 'sections' ]) ?
+			sanitize_text_field( wp_unslash( $_GET[ 'section' ] ) ) : $key;
+
+		echo View::get_instance()->get_template_html('settings', $data); // phpcs:ignore
 	}
 	
 	/**
@@ -507,7 +527,7 @@ class Settings extends Model {
 	 */
 	public function get_settings_tabs() {
 		$tabs = array();
-		$tabs[ 'general' ] = __('General', 'mprm-menu-cart');
+		$tabs[ 'general' ] = esc_html__('General', 'mprm-menu-cart');
 		
 		return apply_filters('mp_menu_settings_tabs', $tabs);
 	}
