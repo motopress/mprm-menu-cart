@@ -78,8 +78,8 @@ class Core extends \mp_restaurant_menu\classes\Core {
 	 * Ajax route URL
 	 */
 	public function wp_ajax_route_url() {
-		$controller = isset($_REQUEST['mp_menu_controller']) ? $_REQUEST['mp_menu_controller'] : null;
-		$action = isset($_REQUEST['mprm_action']) ? $_REQUEST['mprm_action'] : null;
+		$controller = isset($_REQUEST['mp_menu_controller']) ? sanitize_text_field( wp_unslash( $_REQUEST['mp_menu_controller'] ) ) : null;
+		$action = isset($_REQUEST['mprm_action']) ? sanitize_text_field( wp_unslash( $_REQUEST['mprm_action'] ) ) : null;
 		if (!empty($action) && !empty($controller)) {
 			// call controller
 			$controller = $this->get_controller($controller);
