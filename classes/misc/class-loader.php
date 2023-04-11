@@ -14,35 +14,35 @@ class Loader {
 	 * @var array
 	 * @access protected
 	 */
-	protected $_controllerDirectoryPath = array();
+	protected $controllerDirectoryPath = array();
 	/**
 	 * Model Directory Path
 	 *
 	 * @var array
 	 * @access protected
 	 */
-	protected $_modelDirectoryPath = array();
+	protected $modelDirectoryPath = array();
 	/**
 	 * Library Directory Path
 	 *
 	 * @var array
 	 * @access protected
 	 */
-	protected $_libraryDirectoryPath = array();
+	protected $libraryDirectoryPath = array();
 	/**
 	 * Default Directory Path
 	 *
 	 * @var array
 	 * @access protected
 	 */
-	protected $_defaultDirectoryPath = array();
+	protected $defaultDirectoryPath = array();
 	/**
 	 *  Library Directory namespace
 	 *
 	 * @var string
 	 * @access protected
 	 */
-	protected $_namespace = 'mprm_menu_cart\classes';
+	protected $namespace = 'mprm_menu_cart\classes';
 
 	/**
 	 * Constructor
