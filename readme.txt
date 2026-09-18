@@ -3,8 +3,8 @@ Contributors: MotoPress
 Donate link: https://motopress.com/
 Tags: restaurant menu, cart, restaurant, cafe, food, pizza, food menu, food order, ecommerce
 Requires at least: 4.6
-Tested up to: 6.9
-Stable tag: 1.1.0
+Tested up to: 7.1
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,6 +31,9 @@ Use the Restaurant Menu > Settings > Extensions > Menu Cart screen to configure 
 3. Use the `Restaurant Menu > Settings > Extensions > Menu Cart` screen to configure the plugin.
 
 == Changelog ==
+
+= 1.1.1, Sep 17 2026 =
+* Fixed compatibility with Restaurant Menu addon template loading.
 
 = 1.1.0, Apr 11 2023 =
 * Improved compatibility with PHP 8.
